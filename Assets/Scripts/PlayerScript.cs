@@ -30,8 +30,6 @@ public class PlayerScript : MonoBehaviour
     {
         Move();
         PlayerShot();
-
-
     }
 
     private void Move()
@@ -51,18 +49,23 @@ public class PlayerScript : MonoBehaviour
         transform.position = new Vector3(newX, newY, transform.position.z);
     }
 
-    public float shotMax = 0.0f;
+    public float shotMax = 0;
     public float shotDelay = 0;
     private void PlayerShot()
-    {
+    {   
         shotDelay += Time.deltaTime;
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKey(KeyCode.Space))
         {
+            Debug.Log($"shotMax : {shotMax} / shotDelay : {shotDelay}");
             if (shotDelay >= shotMax)
             {
                 shotDelay = 0;
                 Vector3 vec = new Vector3(transform.position.x + 1.1f, transform.position.y - 0.3f, transform.position.z);
                 Instantiate(mShot, vec, Quaternion.identity);
+            }
+            else
+            {
+
             }
         }
     }
