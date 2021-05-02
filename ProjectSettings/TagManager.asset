@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Enemy
+  - Asteroid
   layers:
   - Default
   - TransparentFX
@@ -13,8 +15,8 @@ TagManager:
   - UI
   - Background
   - Player
-  - 
-  - 
+  - PlayerShot
+  - Enemy
   - 
   - 
   - 
@@ -44,9 +46,12 @@ TagManager:
   - name: Background
     uniqueID: 1505542101
     locked: 0
-  - name: PlayerShot
-    uniqueID: 1668068345
-    locked: 0
   - name: Player
     uniqueID: 3690918287
+    locked: 0
+  - name: Astreroid
+    uniqueID: 551333027
+    locked: 0
+  - name: PlayerShot
+    uniqueID: 1668068345
     locked: 0

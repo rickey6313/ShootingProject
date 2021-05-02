@@ -25,7 +25,6 @@ public class PlayerScript : MonoBehaviour
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         Move();
@@ -56,16 +55,11 @@ public class PlayerScript : MonoBehaviour
         shotDelay += Time.deltaTime;
         if(Input.GetKey(KeyCode.Space))
         {
-            Debug.Log($"shotMax : {shotMax} / shotDelay : {shotDelay}");
             if (shotDelay >= shotMax)
             {
                 shotDelay = 0;
                 Vector3 vec = new Vector3(transform.position.x + 1.1f, transform.position.y - 0.3f, transform.position.z);
                 Instantiate(mShot, vec, Quaternion.identity);
-            }
-            else
-            {
-
             }
         }
     }
