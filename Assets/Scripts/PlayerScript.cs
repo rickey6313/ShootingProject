@@ -5,7 +5,9 @@ using UnityEngine;
 public class PlayerScript : MonoBehaviour
 {
     public Camera mMainCamera;
+    public GameObject mShot;
     public float speed = 0;
+
     Vector3 min;
     Vector3 max;
     Vector2 colSize;
@@ -17,15 +19,22 @@ public class PlayerScript : MonoBehaviour
         float speed = 3.0f;
         min = mMainCamera.ViewportToWorldPoint(new Vector3(0, 0, 0));
         max = mMainCamera.ViewportToWorldPoint(new Vector3(1, 1, 0));
-        print(min);
-        print(max);
-
+        
         colSize = GetComponent<BoxCollider2D>().size;
         chrSize = new Vector2(colSize.x / 2, colSize.y / 2);
+        
     }
 
     // Update is called once per frame
     void Update()
+    {
+        Move();
+        PlayerShot();
+
+
+    }
+
+    private void Move()
     {
         float x = Input.GetAxisRaw("Horizontal");
         float y = Input.GetAxisRaw("Vertical");
@@ -35,24 +44,26 @@ public class PlayerScript : MonoBehaviour
 
         float newX = transform.position.x;
         float newY = transform.position.y;
-        if(newX < min.x + chrSize.x)
-        {
-            newX = min.x + chrSize.x;
-        }
-        if (newX > max.x - chrSize.x)
-        {
-            newX = max.x - chrSize.x;
-        }
 
-        if (newY < min.y + chrSize.y)
-        {
-            newY = min.y + chrSize.y;
-        }
-        if (newY > max.y - chrSize.y)
-        {
-            newY = max.y - chrSize.y;
-        }
+        newX = Mathf.Clamp(newX, min.x + chrSize.x, max.x - chrSize.x);
+        newY = Mathf.Clamp(newY, min.y + chrSize.y, max.y - chrSize.y);
 
         transform.position = new Vector3(newX, newY, transform.position.z);
+    }
+
+    public float shotMax = 0.0f;
+    public float shotDelay = 0;
+    private void PlayerShot()
+    {
+        shotDelay += Time.deltaTime;
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            if (shotDelay >= shotMax)
+            {
+                shotDelay = 0;
+                Vector3 vec = new Vector3(transform.position.x + 1.1f, transform.position.y - 0.3f, transform.position.z);
+                Instantiate(mShot, vec, Quaternion.identity);
+            }
+        }
     }
 }
