@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ShotScript : MonoBehaviour
 {
-    public GameObject shotEffect;
+    public GameObject shotEffect;    
     public float speed = 10.0f;
 
     // Start is called before the first frame update
@@ -29,10 +29,9 @@ public class ShotScript : MonoBehaviour
         if(collision.gameObject.CompareTag("Asteroid"))
         {
             AsteroidScript astroidScript = collision.gameObject.GetComponent<AsteroidScript>();
-            astroidScript.hp -= 3;
+            astroidScript.TakeDamage(3);            
             Instantiate(shotEffect, transform.position, Quaternion.identity);
             Destroy(gameObject);
-            //Destroy(collision.gameObject);
         }
     }
 }

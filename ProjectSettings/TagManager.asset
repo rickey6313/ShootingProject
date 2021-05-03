@@ -17,7 +17,7 @@ TagManager:
   - Player
   - PlayerShot
   - Enemy
-  - 
+  - Item
   - 
   - 
   - 
@@ -51,6 +51,9 @@ TagManager:
     locked: 0
   - name: Astreroid
     uniqueID: 551333027
+    locked: 0
+  - name: Item
+    uniqueID: 2661635737
     locked: 0
   - name: PlayerShot
     uniqueID: 1668068345
