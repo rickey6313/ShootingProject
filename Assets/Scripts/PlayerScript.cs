@@ -6,7 +6,9 @@ public class PlayerScript : MonoBehaviour
 {
     public Camera mMainCamera;
     public GameObject mShot;
+    public GameObject explosion;
     public float speed = 0;
+    public int hp = 0;
 
     Vector3 min;
     Vector3 max;
@@ -16,6 +18,7 @@ public class PlayerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        hp = 10;
         float speed = 3.0f;
         min = mMainCamera.ViewportToWorldPoint(new Vector3(0, 0, 0));
         max = mMainCamera.ViewportToWorldPoint(new Vector3(1, 1, 0));
@@ -61,6 +64,26 @@ public class PlayerScript : MonoBehaviour
                 Vector3 vec = new Vector3(transform.position.x + 1.1f, transform.position.y - 0.3f, transform.position.z);
                 Instantiate(mShot, vec, Quaternion.identity);
             }
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.CompareTag("Item"))
+        {
+            CoinScript coinScript = collision.gameObject.GetComponent<CoinScript>();
+            GameManager.instance.coin += coinScript.coinSize;
+            GameManager.instance.coinText.text = GameManager.instance.coin.ToString();
+            Debug.Log($"Coin : {GameManager.instance.coin}");
+            Destroy(coinScript.gameObject);
+        }
+        else if(collision.gameObject.CompareTag("Astroid") ||
+            collision.gameObject.CompareTag("Enemy") ||
+            collision.gameObject.CompareTag("EnemyShot"))
+        {
+            Destroy(collision.gameObject);
+            Destroy(gameObject);
+            Instantiate(explosion, transform.position, Quaternion.identity);
         }
     }
 }

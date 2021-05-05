@@ -9,7 +9,8 @@ public class AsteroidScript : MonoBehaviour
     public int hp = 10;
     public float moveSpeed = 5;
     public float rotSpeed = 5;
-    
+    public int coinSize = 2;
+
     // Update is called once per frame
     void Update()
     {
@@ -25,7 +26,9 @@ public class AsteroidScript : MonoBehaviour
         {
             Vector3 tr = transform.position;
             Vector3 randomPos = new Vector3(tr.x + Random.Range(-0.01f, 0.01f), tr.y + Random.Range(-0.01f, 0.01f), 0);
-            Instantiate(coin, randomPos, Quaternion.identity);
+            GameObject coinObj =  Instantiate(coin, randomPos, Quaternion.identity);
+            CoinScript coinScr = coinObj.GetComponent<CoinScript>();
+            coinScr.coinSize = coinSize;
             Instantiate(explosion, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }

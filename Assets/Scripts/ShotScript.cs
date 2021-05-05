@@ -26,10 +26,17 @@ public class ShotScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.CompareTag("Asteroid"))
+        if(collision.gameObject.CompareTag("Astroid"))
         {
             AsteroidScript astroidScript = collision.gameObject.GetComponent<AsteroidScript>();
             astroidScript.TakeDamage(3);            
+            Instantiate(shotEffect, transform.position, Quaternion.identity);
+            Destroy(gameObject);
+        }
+        else if (collision.gameObject.CompareTag("Enemy"))
+        {
+            EnemyScript EnemyScript = collision.gameObject.GetComponent<EnemyScript>();
+            EnemyScript.TakeDamage(3);
             Instantiate(shotEffect, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }

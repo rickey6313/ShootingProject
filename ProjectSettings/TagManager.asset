@@ -5,7 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
-  - Asteroid
+  - Item
+  - EnemyShot
+  - Astroid
   layers:
   - Default
   - TransparentFX
@@ -18,7 +20,7 @@ TagManager:
   - PlayerShot
   - Enemy
   - Item
-  - 
+  - EnemyShot
   - 
   - 
   - 
@@ -57,4 +59,10 @@ TagManager:
     locked: 0
   - name: PlayerShot
     uniqueID: 1668068345
+    locked: 0
+  - name: EnemyShot
+    uniqueID: 1613997035
+    locked: 0
+  - name: Enemy
+    uniqueID: 1989183339
     locked: 0

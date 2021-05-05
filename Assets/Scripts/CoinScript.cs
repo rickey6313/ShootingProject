@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class CoinScript : MonoBehaviour
 {
+    public int coinSize = 1;
     public float speed = 1.5f;
 
     void Update()
