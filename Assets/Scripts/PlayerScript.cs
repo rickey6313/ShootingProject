@@ -72,9 +72,10 @@ public class PlayerScript : MonoBehaviour
         if(collision.gameObject.CompareTag("Item"))
         {
             CoinScript coinScript = collision.gameObject.GetComponent<CoinScript>();
-            GameManager.instance.coin += coinScript.coinSize;
-            GameManager.instance.coinText.text = GameManager.instance.coin.ToString();
-            Debug.Log($"Coin : {GameManager.instance.coin}");
+            GameManager.instance.coinInGame += coinScript.coinSize;
+            GameManager.instance.coinText.text = GameManager.instance.coinInGame.ToString();
+            GameDataScript.instance.AddCoin(coinScript.coinSize);
+            GameManager.instance.coinText.text = GameDataScript.instance.GetCoin().ToString();
             Destroy(coinScript.gameObject);
         }
         else if(collision.gameObject.CompareTag("Astroid") ||

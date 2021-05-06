@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     public GameObject astroid;
     public GameObject pausePanel;
     public Text coinText;
-    public int coin;
+    public int coinInGame;
     public List<GameObject> enemyList = new List<GameObject>();
     private float time = 0.0f;
     private float spawnTime = 2.0f;
@@ -23,8 +23,8 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        coin = 0;
-        coinText.text = coin.ToString();
+        coinInGame = 0;
+        coinText.text = GameDataScript.instance.GetCoin().ToString();
         maxRight = Camera.main.ViewportToWorldPoint(new Vector3(1, 1, 0)).x;
     }
 
