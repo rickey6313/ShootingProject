@@ -9,6 +9,21 @@ public class GameDataScript : MonoBehaviour
     public float coin;
     private TextAsset shipTextAsset;
     public ShipData[] ships;
+    private int _select;
+    public int select 
+    {
+        get 
+        { 
+            _select = PlayerPrefs.GetInt("ChrSelect", 0);
+            return _select;
+        }
+        set
+        {
+            _select = value;
+            PlayerPrefs.SetInt("ChrSelect", _select);
+        }
+    }
+
     private void Awake()
     {
         if (instance == null)

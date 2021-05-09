@@ -11,8 +11,9 @@ namespace Game
         public float chr_level;
         public int locked;
         public float dmg;
+        public float nextDmg;
 
-        public ShipData(int id, float base_dmg, string name, string kName, float chr_level = 1, int locked = 1, float dmg = 1)
+        public ShipData(int id, float base_dmg, string name, string kName, float chr_level = 1, int locked = 1, float dmg = 1, float nextDmg = 1)
         {
             this.id = id;
             this.base_dmg = base_dmg;
@@ -21,11 +22,19 @@ namespace Game
             this.chr_level = chr_level;
             this.locked = locked;
             this.dmg = dmg;
+            this.nextDmg = nextDmg;
+        }
+
+        public string GetImageName()
+        {
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            return sb.AppendFormat("Character/{0}/0", id.ToString()).ToString();
         }
 
         public void SetDamage()
         {
             dmg = base_dmg * chr_level;
+            this.nextDmg = (chr_level + 1) * base_dmg;
         }
 
         public void Show()
