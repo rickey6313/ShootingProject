@@ -19,7 +19,8 @@ public class PlayerScript : MonoBehaviour
     void Start()
     {
         hp = 10;
-        float speed = 3.0f;
+        aroundMax = 0.05f;
+        speed = 3.0f;
         min = mMainCamera.ViewportToWorldPoint(new Vector3(0, 0, 0));
         max = mMainCamera.ViewportToWorldPoint(new Vector3(1, 1, 0));
         
@@ -53,18 +54,60 @@ public class PlayerScript : MonoBehaviour
 
     public float shotMax = 0;
     public float shotDelay = 0;
+    public float aroundDelay = 0;
+    public float aroundMax = 0.01f;
     private void PlayerShot()
     {   
         shotDelay += Time.deltaTime;
-        if(Input.GetKey(KeyCode.Space))
+        aroundDelay += Time.deltaTime;
+        angle += 1.0f * Mathf.PI / 120.0f;
+        
+        if(aroundDelay >= aroundMax)
+        {
+            aroundDelay = 0;
+            AttackType3();
+        }
+
+        if (Input.GetKey(KeyCode.Space))
         {
             if (shotDelay >= shotMax)
             {
                 shotDelay = 0;
-                Vector3 vec = new Vector3(transform.position.x + 1.1f, transform.position.y - 0.3f, transform.position.z);
-                Instantiate(mShot, vec, Quaternion.identity);
+                //AttackType2();
+                
             }
         }
+    }
+
+    private void AttackType1()
+    {
+        Vector3 vec = new Vector3(transform.position.x + 1.1f, transform.position.y - 0.3f, transform.position.z);
+        Instantiate(mShot, vec, Quaternion.identity);
+    }
+
+    private void AttackType2()
+    {
+        Vector3 vec = new Vector3(transform.position.x + 1.1f, transform.position.y - 0.3f, transform.position.z);
+        Quaternion qu1 = new Quaternion();
+        Quaternion qu2 = new Quaternion();
+        qu1 = Quaternion.Euler(new Vector3(0, 0, 15.0f));
+        qu2 = Quaternion.Euler(new Vector3(0, 0, -15.0f));
+        Instantiate(mShot, vec, qu1);
+        Instantiate(mShot, vec, Quaternion.identity);
+        Instantiate(mShot, vec, qu2);
+    }
+    float angle = 0.0f;
+    float radius = 2.0f;
+    private void AttackType3()
+    {
+        float x = 0;
+        float y = 0;
+        
+        x = radius * Mathf.Cos(angle);
+        y = radius * Mathf.Sin(angle);
+
+        Vector3 vec = new Vector3(transform.position.x + x, transform.position.y + y, transform.position.z);
+        Instantiate(explosion, vec, Quaternion.identity);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
