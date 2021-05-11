@@ -13,12 +13,20 @@ public class MenuItemScript : MonoBehaviour
     public Text dmgText;
     public Text nextDmgText;
 
-    public void SetUI(string shipName, string shipLevel, string shipDmg, string shipNextDmg)
+    public void SetUI(string shipName, string shipLevel, string shipDmg, string shipNextDmg, int locked)
     {
         shipNameText.text = shipName;
         levelText.text = shipLevel;
         dmgText.text = shipDmg;
         nextDmgText.text = shipNextDmg;
+        if(locked == 1)
+        {
+            unlockButton.gameObject.SetActive(true);
+        }
+        else
+        {
+            unlockButton.gameObject.SetActive(false);
+        }
     }
 
     public void UnlockAction()
