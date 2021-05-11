@@ -12,8 +12,9 @@ namespace Game
         public int locked;
         public float dmg;
         public float nextDmg;
+        public float unlockCoin;
 
-        public ShipData(int id, float base_dmg, string name, string kName, float chr_level = 1, int locked = 1, float dmg = 1, float nextDmg = 1)
+        public ShipData(int id, float base_dmg, string name, string kName, float unlockCoin, float chr_level = 1, int locked = 1, float dmg = 1, float nextDmg = 1)
         {
             this.id = id;
             this.base_dmg = base_dmg;
@@ -23,6 +24,7 @@ namespace Game
             this.locked = locked;
             this.dmg = dmg;
             this.nextDmg = nextDmg;
+            this.unlockCoin = unlockCoin;
         }
 
         public string GetImageName()
@@ -39,7 +41,7 @@ namespace Game
 
         public void Show()
         {
-            Debug.Log($"id : {id} base_dmg : {base_dmg} name : {name} kName : {kName} chr_level : {chr_level} locked : {locked} dmg : {dmg}");
+            Debug.Log($"id : {id} base_dmg : {base_dmg} name : {name} kName : {kName} chr_level : {chr_level} unlockCoin : {unlockCoin} locked : {locked} dmg : {dmg}");
         }
 
     }

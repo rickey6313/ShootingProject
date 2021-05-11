@@ -68,6 +68,7 @@ public class GameDataScript : MonoBehaviour
             float base_dmg = float.Parse(rows[1]);
             string name = rows[2];
             string kName = rows[3];
+            float unlockCoin = float.Parse(rows[4]);
 
             //ships[i - 1].id = int.Parse(rows[0]);
             //ships[i - 1].base_dmg = float.Parse(rows[1]);
@@ -85,7 +86,7 @@ public class GameDataScript : MonoBehaviour
             {
                 locked = PlayerPrefs.GetInt("Chr_Locked" + i.ToString(), 1);
             }
-            ships[i - 1] = new ShipData(id, base_dmg, name, kName, chrLevel, locked);
+            ships[i - 1] = new ShipData(id, base_dmg, name, kName, unlockCoin, chrLevel, locked);
             ships[i - 1].SetDamage();
 
         }

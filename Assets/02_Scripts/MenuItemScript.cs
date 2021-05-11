@@ -12,20 +12,25 @@ public class MenuItemScript : MonoBehaviour
     public Text levelText;
     public Text dmgText;
     public Text nextDmgText;
+    public Text unlockCoinText;
 
-    public void SetUI(string shipName, string shipLevel, string shipDmg, string shipNextDmg, int locked)
+    public void SetUI(string shipName, string shipLevel, string shipDmg, string shipNextDmg, int locked, float unlockCoin)
     {
         shipNameText.text = shipName;
         levelText.text = shipLevel;
         dmgText.text = shipDmg;
-        nextDmgText.text = shipNextDmg;
-        if(locked == 1)
+        nextDmgText.text = shipNextDmg.ToString() + " Coin";
+        unlockCoinText.text = unlockCoin.ToString();
+
+        if (locked == 1)
         {
             unlockButton.gameObject.SetActive(true);
+            unlockCoinText.gameObject.SetActive(true);
         }
         else
         {
             unlockButton.gameObject.SetActive(false);
+            unlockCoinText.gameObject.SetActive(false);
         }
     }
 
