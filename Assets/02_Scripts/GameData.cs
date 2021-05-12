@@ -44,6 +44,17 @@ namespace Game
             Debug.Log($"id : {id} base_dmg : {base_dmg} name : {name} kName : {kName} chr_level : {chr_level} unlockCoin : {unlockCoin} locked : {locked} dmg : {dmg}");
         }
 
+        public void SetLock(int locked)
+        {
+            this.locked = locked;
+            PlayerPrefs.SetInt("Chr_Locked" + id.ToString(), locked);
+        }
+
+        public int GetLock()
+        {
+            this.locked = PlayerPrefs.GetInt("Chr_Locked" + id.ToString());
+            return this.locked;
+        }
     }
 
 }

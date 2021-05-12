@@ -7,12 +7,18 @@ using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
+    public static MenuManager instance;
     public GameObject item;
     public GameObject content;
     public GameObject addButtonObj;
     public GameObject ClearButtonObj;
     public Text coinText;
     public GameObject coinImage;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     private void Start()
     {

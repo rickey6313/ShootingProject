@@ -53,6 +53,8 @@ public class GameDataScript : MonoBehaviour
     {
         this.coin += coin;
         PlayerPrefs.SetFloat("TotalCoin", this.coin);
+        MenuManager.instance.coinImage.gameObject.SetActive(true);
+        MenuManager.instance.coinText.gameObject.SetActive(true);
     }
 
     private void LoadData()
@@ -70,11 +72,6 @@ public class GameDataScript : MonoBehaviour
             string kName = rows[3];
             float unlockCoin = float.Parse(rows[4]);
 
-            //ships[i - 1].id = int.Parse(rows[0]);
-            //ships[i - 1].base_dmg = float.Parse(rows[1]);
-            //ships[i - 1].name = rows[2];
-            //ships[i - 1].kName = rows[3];
-
             int chrLevel = PlayerPrefs.GetInt("Chr_Level" + i.ToString(), 1);
             int locked;
 
@@ -84,7 +81,7 @@ public class GameDataScript : MonoBehaviour
             }
             else
             {
-                locked = PlayerPrefs.GetInt("Chr_Locked" + i.ToString(), 1);
+                locked = PlayerPrefs.GetInt("Chr_Locked" + (i-1).ToString(), 1);
             }
             ships[i - 1] = new ShipData(id, base_dmg, name, kName, unlockCoin, chrLevel, locked);
             ships[i - 1].SetDamage();
