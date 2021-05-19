@@ -46,7 +46,8 @@ public class GameDataScript : MonoBehaviour
 
     public float GetCoin()
     {
-        return this.coin = PlayerPrefs.GetFloat("TotalCoin", 0);
+        this.coin = PlayerPrefs.GetFloat("TotalCoin", 0);
+        return coin;
     }
 
     public void AddCoin(float coin)
@@ -91,5 +92,26 @@ public class GameDataScript : MonoBehaviour
         {
             ships[j].Show();
         }
+    }
+
+    public bool CanUnlock(int id)
+    {
+        if (GetCoin() > ships[id].unlockCoin)
+        {
+            if (ships[id].GetLock() == 1)
+                return true;
+            else
+            {
+                return false;
+            }
+        }
+        else
+            return false;
+    }
+
+    public void ExcuteUnlock(int id)
+    {
+        AddCoin(-ships[id].unlockCoin);
+        ships[id].SetLock(0);
     }
 }

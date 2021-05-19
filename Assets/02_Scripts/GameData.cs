@@ -46,14 +46,24 @@ namespace Game
 
         public void SetLock(int locked)
         {
+            if (id == 0)
+                locked = 0;
+
             this.locked = locked;
             PlayerPrefs.SetInt("Chr_Locked" + id.ToString(), locked);
         }
 
         public int GetLock()
         {
-            this.locked = PlayerPrefs.GetInt("Chr_Locked" + id.ToString());
-            return this.locked;
+            if(id == 0)
+            {
+                return 0;
+            }
+            else
+            {
+                this.locked = PlayerPrefs.GetInt("Chr_Locked" + id.ToString(), 1);
+                return this.locked;
+            }
         }
     }
 

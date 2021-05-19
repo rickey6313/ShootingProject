@@ -36,8 +36,13 @@ public class MenuItemScript : MonoBehaviour
 
     public void UnlockAction()
     {
-        unlockButton.gameObject.SetActive(false);
-        GameDataScript.instance.ships[id].SetLock(0);
+        if(GameDataScript.instance.CanUnlock(id))
+        {
+            GameDataScript.instance.ExcuteUnlock(id);
+            unlockButton.gameObject.SetActive(false);
+            unlockCoinText.gameObject.SetActive(false);
+            MenuManager.instance.coinText.text = GameDataScript.instance.GetCoin().ToString();
+        }
     }
 
     public void PwerUpAction()
